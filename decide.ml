@@ -13,6 +13,7 @@ let implode l =
   | c :: l -> result.[i] <- c; imp (i + 1) l in
   imp 0 l;;
 
+(* creates an initial key from a single word and it's corresponding cword *)
 let to_key (wrd:string) (cpt:string) : (char * char) list = 
   let wrd = explode wrd in
   let cpt = explode cpt in
@@ -34,12 +35,23 @@ let rec check_unf_key (word: char list) (cword : char list)
   | _ -> raise(Failure "won't occur, same lengths")
 
 
+(* updates a key to incorporate information from an additional word that 
+ * fits the old key *)
+let update_key key wrd cpt = 
+  let f w c rest = if not (List.mem_assoc w key) then (w,c)::rest else rest in 
+  List.fold_right2 f wrd cpt key
+
+(* sorts a 'a list list by ascending list length *) 
+let short_first lst : list = 
+    List.sort (fun x y -> compare (List.length x) (List.length y)) lst in
+
+(* the main decide function *)
 let decide (lst:choice list list) : choice list =
-  let shortest : list = 
-    let f l1 l2 = if List.length l1 > List.length l2 then l2 else l1 in
-    List.fold_right f lst in
-  let keys: (char * char) list list =
+  match lst with
+
+(*
+let keys: (char * char) list list =
     List.map (fun x -> to_key x.word) shortest in
 
-
-List.mapi ()
+[{key = , ans = [(word, position)]}]
+*)
