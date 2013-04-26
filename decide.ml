@@ -45,8 +45,6 @@ let update_key key wrd cpt =
 let short_first lst : list = 
     List.sort (fun x y -> compare (List.length x) (List.length y)) lst in
 
-
-
 (* the main decide function:
  * takes the original cryptogram in list form and a list containing lists of all
  * possible choices for each word in the crytogram. returns a list of all 
