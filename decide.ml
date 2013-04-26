@@ -38,8 +38,8 @@ let decide (lst:choice list list) : choice list =
   let shortest : list = 
     let f l1 l2 = if List.length l1 > List.length l2 then l2 else l1 in
     List.fold_right f lst in
-  let keys: (char * char) list list =
+  let keys : (char * char) list list =
     List.map (fun x -> to_key x.word) shortest in
-
+  
 
 List.mapi ()
