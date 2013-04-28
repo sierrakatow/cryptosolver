@@ -45,18 +45,45 @@ let update_key key wrd cpt =
 let short_first lst : list = 
     List.sort (fun x y -> compare (List.length x) (List.length y)) lst in
 
+(* takes the choice list list and returns a list of lists of record containing
+ * words and their ordinal position in the answer*)
+type with_info = {w : string; c : string; p : int}
+
+let add_info lst cpt =
+  let f i x = {w = x.word; p = i} in
+  let with_pos = List.mapi (fun i xs -> List.map (f i) xs) lst in
+  let f2 y x = x with c = y in 
+  List.map2 (fun xs c -> List.map (f2 c) xs) lst cpt 
+
+type potential = {key : (char * char) list; ans : with_info list}
+
+(* takes a list of partial keys and answers and updates them with info from a 
+   list of choices for a crypto word *)
+let cont_key (keys: potential list) (lst: with_info list) : potntial list =
+  let f k word rest = 
+    let wrd = explode word.w in
+    let cpt = explode word.c in
+    if check_unf_key wrd cpt k then 
+      {key = udate_key k wrd cpt; ans = word :: k.ans} :: rest
+    else rest in
+  List.flatten (List.map (fun x -> List.fold_right (f x.key) lst []) keys)
+
 (* the main decide function:
  * takes the original cryptogram in list form and a list containing lists of all
  * possible choices for each word in the crytogram. returns a list of all 
  * possible answers where every word conforms to a single key *)
-let decide (lst:choice list list) : choice list list =
-  match short_first lst with
-  | [] -> 
-  | 
+let decide (choices:choice list list) (cpt:string list) : choice list list =
+  let lst = short_first (add_info choices) in
+  let start_keys =
+    List.map (fun x -> {key = (to_key hd.w hd.c); ans = [x]}) (List.hd lst) in
+  let rec complete keys =
+    match List.tl lst with
+    | []-> keys
+    | hd::tl -> answers (cont_keys keys hd) in
+  let to_choices (a: potential): choice list = 
+    let ordered = List.sort (fun a b -> compare a.p b.p)) a.ans in
+    let find_choice (xs:choice list) (y:with_info) = 
+      List.find (fun x -> x.word = y.w) xs in
+    List.map2 find_choice choices ordered in
+  List.map to_choices (complete start_keys)
 
-(*
-let keys: (char * char) list list =
-    List.map (fun x -> to_key x.word) shortest in
-
-[{key = , ans = [(word, position)]}]
-*)
