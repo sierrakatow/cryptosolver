@@ -25,3 +25,4 @@ let read_file filename =
   with End_of_file ->
     close_in chan;
     List.rev !lines ;;
+read_file "pos.txt";;
