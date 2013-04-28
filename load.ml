@@ -1,3 +1,4 @@
+type choice = {word: string; pos: char list};;
 (* Helper function to deal with each line of the dictionary text file *)
 let separate (s:string) =
   (* get location where the word ends and the part of speech begins *)
