@@ -1,17 +1,11 @@
 type choice = {word:string; freq:int; pos:char};;
 
+(* splits a string into a char list *)
 let explode s =
   let rec expl i l =
     if i < 0 then l else
     expl (i - 1) (s.[i] :: l) in
   expl (String.length s - 1) [];;
-
-let implode l =
-  let result = String.create (List.length l) in
-  let rec imp i = function
-  | [] -> result
-  | c :: l -> result.[i] <- c; imp (i + 1) l in
-  imp 0 l;;
 
 (* creates an initial key from a single word and it's corresponding cword *)
 let to_key (wrd:string) (cpt:string) : (char * char) list = 
@@ -73,7 +67,10 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
 (* the main decide function:
  * takes the original cryptogram in list form and a list containing lists of all
  * possible choices for each word in the crytogram. returns a list of all 
- * possible answers where every word conforms to a single key *)
+ * possible answers where every word conforms to a single key
+ * to_choives is a heler function that puts the with_info list of words back 
+ * into the order in which they appeared in the cryptogram and turns them back 
+ * into choices*)
 let decide (choices:choice list list) (cpt:string list) : choice list list =
   let lst = short_first (add_info choices cpt) in
   let start_keys =
