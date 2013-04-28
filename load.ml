@@ -1,4 +1,3 @@
-type entry = {word: string; pos: char list};;
 let separate (s:string) = 
   let separate_location = String.rindex s '\t' in
   let wordstring = String.sub s 0 separate_location in
