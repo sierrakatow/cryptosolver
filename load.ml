@@ -23,7 +23,9 @@ let separate (s:string) =
   {word = wordstring; pos = parse_pos posstring}
 ;;
 
-(* read_file parses through text file line by line *)
+(* read_file parses through text file line by line 
+ * source: http://stackoverflow.com/questions/5774934/how-do-i-read-in-lines-from-a-text-file-in-ocaml 
+ *)
 let read_file filename =
   (* establish output pointer *)
   let lines = ref [] in

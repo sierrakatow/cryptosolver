@@ -16,9 +16,8 @@ let implode crword =
   imp 0 crword;;
 
 
-type word_schm = (char*int) list in
-type counter = 0 in
-type crword = explode cword in
+type word_schm = (char*int) list 
+type crword = explode cword
 
 let rec checkchar (nchar: char) (tuple_list: (char*int) list) : bool =
 (*checks if a char has already appeared in the list of tuples*)
