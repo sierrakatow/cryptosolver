@@ -24,7 +24,9 @@ let separate (s:string) =
 ;;
 
 (* read_file parses through text file line by line 
- * source: http://stackoverflow.com/questions/5774934/how-do-i-read-in-lines-from-a-text-file-in-ocaml 
+ * source: 
+ * http://stackoverflow.com/questions/5774934/
+ * how-do-i-read-in-lines-from-a-text-file-in-ocaml 
  *)
 let read_file filename =
   (* establish output pointer *)
