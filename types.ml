@@ -1,4 +1,4 @@
-module DICT =
+module CRYPTO =
   struct
     type cryptogram = string
     type choice = {word : string; pos : char list}
