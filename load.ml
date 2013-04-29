@@ -46,5 +46,3 @@ let read_file filename =
     (* Reverse output list to reestablish alphabetical order *)
     List.rev !lines ;;
 
-(* Run function on dictionary text file *)
-read_file "pos.txt";;
