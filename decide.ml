@@ -78,5 +78,4 @@ let decide (choices:choice list list) (cpt:string list) : choice list list =
       List.find (fun x -> x.word = y.w) xs in
     List.map2 find_choice choices ordered in
   List.map to_choices (complete start_keys)
-
 ;;
