@@ -1,4 +1,5 @@
 #load "str.cma"
+open Crypto
 
 let main cryptogram = 
   (* load in dictionary *)

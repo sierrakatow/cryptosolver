@@ -1,4 +1,4 @@
-type choice = {word:string; freq:int; pos:char};;
+open types
 
 (* splits a string into a char list *)
 let explode s =

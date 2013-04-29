@@ -1,3 +1,5 @@
+open Crypto
+
 (*********************************************************************
  ***************************SOURCE CODE*******************************
  *********************************************************************
@@ -7,17 +9,6 @@
  *    AUTHORED BY: rixed                                             *
  *********************************************************************)     
 
-(* TYPES *)
-type color = Red | Black 
-type 'a rbtree = Node of color * 'a * 'a rbtree * 'a rbtree | Leaf 
- 
-(* ADDITIONAL TYPES 
- * The below is not from the source and is original code. *)
-type choice = {word : string; freq : int; pos : string}
-type entry = {scheme : string;choices : choice list}
-type dict = entry rbtree
-(* Cited code resumes*)
-
 let balance = function 
         | Black, z, Node (Red, y, Node (Red, x, a, b), c), d 
         | Black, z, Node (Red, x, a, Node (Red, y, b, c)), d 
@@ -25,7 +16,7 @@ let balance = function
         | Black, x, a, Node (Red, y, b, Node (Red, z, c, d)) -> 
                 Node (Red, y, Node (Black, x, a, b), Node (Black, z, c, d)) 
         | a, b, c, d -> Node (a, b, c, d) 
-(* THE BASIS FOR OUR INSERT  
+(* The basis of our insert 
 let insert x s = 
         let rec ins = function 
                 | Leaf -> Node (Red, x, Leaf, Leaf) 

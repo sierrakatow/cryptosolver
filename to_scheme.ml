@@ -1,3 +1,5 @@
+open Crypto
+
 let explode cw =
 (*explodes a string into a list of chars by iterating over the string and adding each letter to a list*)
   let rec expl i l =
