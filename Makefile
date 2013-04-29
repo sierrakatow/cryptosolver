@@ -1,7 +1,7 @@
 all: Cryptogramsolver
 
 # These must be in the right order--no forward refs
-FILES = types.ml load.ml Dictionary.ml decide.ml to_scheme.ml \
+FILES = Crypto.ml load.ml Dictionary.ml decide.ml to_scheme.ml \
 	main.ml
 
 Cryptogramsolver: $(FILES)

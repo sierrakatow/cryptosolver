@@ -10,12 +10,12 @@ open Crypto
  *********************************************************************)     
 
 let balance = function 
-        | Black, z, Node (Red, y, Node (Red, x, a, b), c), d 
-        | Black, z, Node (Red, x, a, Node (Red, y, b, c)), d 
-        | Black, x, a, Node (Red, z, Node (Red, y, b, c), d) 
-        | Black, x, a, Node (Red, y, b, Node (Red, z, c, d)) -> 
-                Node (Red, y, Node (Black, x, a, b), Node (Black, z, c, d)) 
-        | a, b, c, d -> Node (a, b, c, d) 
+        | CRYPTO.Black, z, CRYPTO.Node (CRYPTO.Red, y, CRYPTO.Node (CRYPTO.Red, x, a, b), c), d 
+        | CRYPTO.Black, z, CRYPTO.Node (CRYPTO.Red, x, a, CRYPTO.Node (CRYPTO.Red, y, b, c)), d 
+        | CRYPTO.Black, x, a, CRYPTO.Node (CRYPTO.Red, z, CRYPTO.Node (CRYPTO.Red, y, b, c), d) 
+        | CRYPTO.Black, x, a, CRYPTO.Node (CRYPTO.Red, y, b, CRYPTO.Node (CRYPTO.Red, z, c, d)) -> 
+                CRYPTO.Node (CRYPTO.Red, y, CRYPTO.Node (CRYPTO.Black, x, a, b), CRYPTO.Node (CRYPTO.Black, z, c, d)) 
+        | a, b, c, d -> CRYPTO.Node (a, b, c, d) 
 (* The basis of our insert 
 let insert x s = 
         let rec ins = function 
@@ -39,31 +39,31 @@ let insert x s =
 
 (* Condenses entries with the same schemes into one entry, appending the 
  * first one-choice entry's choice onto that second entry's choice list. *)
-let condense (e1: entry) (e2: entry) : entry =
-  {scheme = e1.scheme; choices = e1.choices @ e2.choices}
+let condense (e1: CRYPTO.entry) (e2: CRYPTO.entry) : CRYPTO.entry =
+  {CRYPTO.scheme = e1.CRYPTO.scheme; CRYPTO.choices = e1.CRYPTO.choices @ e2.CRYPTO.choices}
 
 (* Inserts a one-choice entry into a dictionary, condensing entries with the
  * same scheme. Adapted from cited code above. *)
-let insert (x: entry) (t: dict) : dict = 
+let insert (x: CRYPTO.entry) (t: CRYPTO.dict) : CRYPTO.dict = 
    let rec ins =   
      function 
-     | Leaf -> Node (Red, x, Leaf, Leaf) 
-     | Node (color, ent, r, l) -> 
-       if x.scheme < ent.scheme then balance (color, ent, ins r, l)
-       else if x.scheme > ent.scheme then balance (color, ent, r, ins l) 
-       else Node (color, condense x ent, r, l) in 
+     | CRYPTO.Leaf -> CRYPTO.Node (CRYPTO.Red, x, CRYPTO.Leaf, CRYPTO.Leaf) 
+     | CRYPTO.Node (color, ent, r, l) -> 
+       if x.CRYPTO.scheme < ent.CRYPTO.scheme then balance (color, ent, ins r, l)
+       else if x.CRYPTO.scheme > ent.CRYPTO.scheme then balance (color, ent, r, ins l) 
+       else CRYPTO.Node (color, condense x ent, r, l) in 
      match ins t with
-     | Node (_, ent, r, l) -> Node (Black, ent, r, l)
-     | Leaf -> raise (Invalid_argument "won't have empty subtree")
+     | CRYPTO.Node (_, ent, r, l) -> CRYPTO.Node (CRYPTO.Black, ent, r, l)
+     | CRYPTO.Leaf -> raise (Invalid_argument "won't have empty subtree")
 
 (* Returns a list of choices for a scheme. *)
-let rec lookup (sch: string) (t: dict) : choice list =
+let rec lookup (sch: string) (t: CRYPTO.dict) : CRYPTO.choice list =
   match t with
-  | Leaf -> []
-  | Node (color, ent, r, l) ->
-    if sch < ent.scheme then lookup sch r
-    else if sch > ent.scheme then lookup sch l
-    else ent.choices
+  | CRYPTO.Leaf -> []
+  | CRYPTO.Node (color, ent, r, l) ->
+    if sch < ent.CRYPTO.scheme then lookup sch r
+    else if sch > ent.CRYPTO.scheme then lookup sch l
+    else ent.CRYPTO.choices
 
 
      

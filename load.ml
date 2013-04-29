@@ -20,7 +20,7 @@ let separate (s:string) =
       else 
 	(String.get s 0)::(parse_pos (String.sub s 1 ((String.length s) - 1))) 
     ) in
-  {word = wordstring; pos = parse_pos posstring}
+  {CRYPTO.word = wordstring; CRYPTO.pos = parse_pos posstring}
 ;;
 
 (* read_file parses through text file line by line 
