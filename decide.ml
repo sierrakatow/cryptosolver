@@ -61,7 +61,7 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
  * takes the original cryptogram in list form and a list containing lists of all
  * possible choices for each word in the crytogram. returns a list of all 
  * possible answers where every word conforms to a single key
- * to_choives is a heler function that puts the with_info list of words back 
+ * to_choices is a helper function that puts the with_info list of words back 
  * into the order in which they appeared in the cryptogram and turns them back 
  * into choices*)
 let decide (choices:choice list list) (cpt:string list) : choice list list =
