@@ -1,3 +1,4 @@
+(* Module containing all the type abstractions *)
 module CRYPTO =
   struct
     type cryptogram = string
