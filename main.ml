@@ -1,3 +1,6 @@
+#load "str.cma"
+open Crypto
+
 let main cryptogram = 
   (* load in dictionary *)
   let dict_lst = Load.read_file pos.txt in

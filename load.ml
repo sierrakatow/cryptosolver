@@ -1,4 +1,5 @@
-type choice = {word: string; pos: char list};;
+open Crypto
+
 (* Helper function to deal with each line of the dictionary text file *)
 let separate (s:string) =
   (* get location where the word ends and the part of speech begins *)
@@ -22,7 +23,9 @@ let separate (s:string) =
   {word = wordstring; pos = parse_pos posstring}
 ;;
 
-(* read_file parses through text file line by line *)
+(* read_file parses through text file line by line 
+ * source: http://stackoverflow.com/questions/5774934/how-do-i-read-in-lines-from-a-text-file-in-ocaml 
+ *)
 let read_file filename =
   (* establish output pointer *)
   let lines = ref [] in
