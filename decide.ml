@@ -1,16 +1,9 @@
 type choice = {word:string; freq:int; pos:char};;
 
-(* splits a string into a char list *)
-let explode s =
-  let rec expl i l =
-    if i < 0 then l else
-    expl (i - 1) (s.[i] :: l) in
-  expl (String.length s - 1) [];;
-
 (* creates an initial key from a single word and it's corresponding cword *)
 let to_key (wrd:string) (cpt:string) : (char * char) list = 
-  let wrd = explode wrd in
-  let cpt = explode cpt in
+  let wrd = To_scheme.explode wrd in
+  let cpt = To_scheme.explode cpt in
   List.combine wrd cpt
 ;;
 
@@ -57,8 +50,8 @@ type potential = {key : (char * char) list; ans : with_info list}
    list of choices for a crypto word *)
 let cont_key (keys: potential list) (lst: with_info list) : potential list =
   let f k a word rest = 
-    let wrd = explode word.w in
-    let cpt = explode word.c in
+    let wrd = To_scheme.explode word.w in
+    let cpt = To_scheme.explode word.c in
     if check_unf_key wrd cpt k then 
       {key = update_key k wrd cpt; ans = word :: a} :: rest
     else rest in
