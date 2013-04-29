@@ -17,7 +17,7 @@ let implode crword =
 
 
 type word_schm = (char*int) list 
-type crword = explode cword
+(* type crword = explode cword *)
 
 let rec checkchar (nchar: char) (tuple_list: (char*int) list) : bool =
 (*checks if a char has already appeared in the list of tuples*)
@@ -27,28 +27,35 @@ let rec checkchar (nchar: char) (tuple_list: (char*int) list) : bool =
 ;;
 
 
-let rec extract (word_schm: char*int list) : int list =
+let rec extract (word_scheme: word_schm) : int list =
 (*extracts the ints from the char*int list*)
-	match word_schm with
-	[] -> []
+	match word_scheme with
+	| [] -> []
 	| (_,i)::tl -> i::(extract tl)
 ;;
 
 
 (*turns cryptowords into schemes*)
-let rec to_scheme crword : string =
+let rec to_scheme (crword: string) (word_scheme: (char * int) list) : string =
         let counter = ref 0 in
-	match crword with
-	| hd::tl -> if checkchar hd word_schm = false
+	match (explode crword) with
+	| hd::tl -> if checkchar hd word_scheme = false
                 (*if the character has not been in the word before, increment 
 		  the counter and add the tuple of the character and counter to
 		  the list of tuples*)
-		then counter := !counter+1 in word_schm@(hd, counter); to_scheme tl
+	  then ( 
+	    counter := !counter + 1;
+	    word_scheme@(hd, !counter); 
+	    to_scheme tl word_scheme
+	      )
                 (*if the character is a repeat, find the number matched with it
 		  previously and add the same tuple into the list again*)
-		else word_schm@(List.find (fun (a,b) -> hd = a)); to_scheme tl in
+	  else (
+	    word_scheme@(List.find (fun (a,b) -> hd = a)); 
+	    to_scheme tl
+	  ) in
                 (*extract the ints from the list of tuples, then turns them 
 		  into their char equivalents and implodes the new list of 
 		  chars into a string*)
-	implode (List.map (Char.chr (extract (word_schm))))
+	implode (List.map (Char.chr (extract (word_scheme))))
 ;;
