@@ -39,7 +39,7 @@ let short_first lst =
 type with_info = {w : string; c : string; p : int}
 ;;
 let add_info lst cpt =
-  let f i x = {w = x.word; c = ""; p = i} in
+  let f i x = {w = x.CRYPTO.word; c = ""; p = i} in
   let with_pos = List.mapi (fun i xs -> List.map (f i) xs) lst in
   let f2 y x = {x with c = y} in 
   List.map2 (fun xs c -> List.map (f2 c) xs) with_pos cpt 
@@ -64,7 +64,7 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
  * to_choices is a helper function that puts the with_info list of words back 
  * into the order in which they appeared in the cryptogram and turns them back 
  * into choices*)
-let decide (choices:choice list list) (cpt:string list) : choice list list =
+let decide (choices:CRYPTO.choice list list) (cpt:string list) : CRYPTO.choice list list =
   let lst = short_first (add_info choices cpt) in
   let start_keys =
     List.map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
@@ -72,10 +72,10 @@ let decide (choices:choice list list) (cpt:string list) : choice list list =
     match List.tl lst with
     | []-> keys
     | hd::tl -> complete (cont_key keys hd) in
-  let to_choices (a: potential): choice list = 
+  let to_choices (a: potential): CRYPTO.choice list = 
     let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in
-    let find_choice (xs:choice list) (y:with_info) = 
-      List.find (fun x -> x.word = y.w) xs in
+    let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
+      List.find (fun x -> x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
   List.map to_choices (complete start_keys)
 ;;

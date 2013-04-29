@@ -39,23 +39,21 @@ let rec extract (word_scheme: word_schm) : int list =
 let rec to_scheme (crword: string) (word_scheme: (char * int) list) : string =
         let counter = ref 0 in
 	match (explode crword) with
+	| [] -> implode (List.map Char.chr (extract (word_scheme)))
 	| hd::tl -> if checkchar hd word_scheme = false
                 (*if the character has not been in the word before, increment 
 		  the counter and add the tuple of the character and counter to
 		  the list of tuples*)
 	  then ( 
-	    counter := !counter + 1;
-	    word_scheme@(hd, !counter); 
-	    to_scheme tl word_scheme
+	    counter := !counter + 1; 
+	    to_scheme (implode tl) (word_scheme @ [(hd, !counter)])
 	      )
                 (*if the character is a repeat, find the number matched with it
 		  previously and add the same tuple into the list again*)
 	  else (
-	    word_scheme@(List.find (fun (a,b) -> hd = a)); 
-	    to_scheme tl
-	  ) in
+	    to_scheme (implode tl) (word_scheme@[(List.find (fun (a,b) -> hd = a) word_scheme)]); 
+	  )
                 (*extract the ints from the list of tuples, then turns them 
 		  into their char equivalents and implodes the new list of 
 		  chars into a string*)
-	implode (List.map (Char.chr (extract (word_scheme))))
 ;;
