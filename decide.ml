@@ -1,4 +1,4 @@
-open types
+open Crypto
 
 (* creates an initial key from a single word and it's corresponding cword *)
 let to_key (wrd:string) (cpt:string) : (char * char) list = 
