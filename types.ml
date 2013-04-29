@@ -1,5 +1,6 @@
 module DICT =
   struct
+    type cryptogram = string
     type choice = {word : string; pos : char list}
     type entry = {scheme : string;choices : choice list}
     type color = Red | Black 
