@@ -2,7 +2,7 @@
 open Crypto
 
 (* Takes in a cryptogram and returns answers. *)
-let main (c: Crypto.cryptogram) : answers = 
+let main (c: CRYPTO.cryptogram) : CRYPTO.answers = 
   
   (* Loads dictionary into tree *)
   let dict_lst = Load.read_file pos.txt in
@@ -16,8 +16,8 @@ let main (c: Crypto.cryptogram) : answers =
   let choices = 
     List.map (fun s -> Dictionary.lookup (To_scheme.to_scheme s)) cwords in
 
-  (* Condenses the best choices into an answer list. *)
-  let print_answer (choices : choice list) = 
+  (* Condenses the best choices into an answer list. No NLP rankings used. *)
+  let print_answer (choices : CRYPTO.choice list) = 
     List.fold_right (fun x -> x.word ^ " " ^ y.word) lst ""
   List.map print_answer (Decide.decide choices cwords)
 ;;
