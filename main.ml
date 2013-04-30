@@ -3,7 +3,7 @@ open Crypto
 (* Takes in a cryptogram and returns answers. *)
 let main (c: CRYPTO.cryptogram) = 
   (* Loads dictionary into tree *)
-  let choice_lst = Load.read_file "Dictionary.txt" in
+  let choice_lst = Load.read_file "TestDict.txt" in
   let entry_lst = List.map 
     (fun x -> 
       {CRYPTO.scheme = To_scheme.to_scheme x.CRYPTO.word []; CRYPTO.choices = [x]}) 
