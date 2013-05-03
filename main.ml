@@ -3,23 +3,20 @@ open Crypto
 (* Takes in a cryptogram and returns answers. *)
 let main (c: CRYPTO.cryptogram) = 
   (* Loads dictionary into tree *)
-  let choice_lst = Load.read_file "TestDict.txt" in
-  let entry_lst = List.map 
-    (fun x -> 
-      {CRYPTO.scheme = To_scheme.to_scheme x.CRYPTO.word []; CRYPTO.choices = [x]}) 
-      choice_lst in
-  let dict_tree =
-    List.fold_left (fun x y -> Dictionary.insert y x) CRYPTO.Leaf entry_lst in
-(*
-  let dict_tree = 
-    List.iter (fun x y -> let dict = Dictionary.insert x dict) entry_lst in *)
+  let choice_lst = Load.read_file "Dictionary.txt" in 
+  let entry_lst = List.rev_map 
+    (fun x -> {CRYPTO.scheme = To_scheme.to_scheme x.CRYPTO.word []; 
+	       CRYPTO.choices = [x]}) choice_lst in
+ let dict_tree =
+   List.fold_left (fun x y -> Dictionary.insert y x) CRYPTO.Leaf entry_lst in
 
   (* Breaks cyptogram into a list of cwords *)
   let cwords = Str.split (Str.regexp "[ \t]+") c in
 
   (* Retrieves possible words from the dictionary to match with cwords *)
   let choices = 
-    List.map (fun s -> Dictionary.lookup (To_scheme.to_scheme s []) dict_tree) cwords  in
+    List.map (fun s -> Dictionary.lookup (To_scheme.to_scheme s []) dict_tree) 
+      cwords  in
 
   (* Condenses the best choices into an answer list. No NLP rankings used. *)
   let print_answer (choices : CRYPTO.choice list) = 
