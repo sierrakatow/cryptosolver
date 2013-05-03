@@ -41,7 +41,7 @@ type with_info = {w : string; c : string; p : int}
 let add_info lst cpt : with_info list list=
   let count = ref 0 in
   let f y x = {w = x.CRYPTO.word; c = y; p = !count} in 
-  List.map2 (fun xs y -> count := !count + 1; List.map (f y) xs) lst cpt 
+  List.map2 (fun xs y -> count := !count + 1; List.rev_map (f y) xs) lst cpt 
 ;;
 type potential = {key : (char * char) list; ans : with_info list}
 
@@ -54,7 +54,7 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
     if check_unf_key wrd cpt k then 
       {key = update_key k wrd cpt; ans = word :: a} :: rest
     else rest in
-  List.flatten (List.map (fun x -> List.fold_right (f x.key x.ans) lst []) keys)
+  List.flatten (List.rev_map (fun x -> List.fold_right (f x.key x.ans) lst []) keys)
 ;;
 (* the main decide function:
  * takes the original cryptogram in list form and a list containing lists of all
@@ -63,18 +63,20 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
  * to_choices is a helper function that puts the with_info list of words back 
  * into the order in which they appeared in the cryptogram and turns them back 
  * into choices*)
-let decide (choices:CRYPTO.choice list list) (cpt:string list) : CRYPTO.choice list list =
+let decide (choices:CRYPTO.choice list list) (cpt:string list) : 
+    CRYPTO.choice list list =
   let lst = short_first (add_info choices cpt) in
   let start_keys =
     List.rev_map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
-  let rec complete keys =
-    match List.tl lst with
+  let rec complete keys l =
+ if l = [] then keys
+ else match List.tl l with
     | []-> keys
-    | hd::tl -> complete (cont_key keys hd) in
+    | hd::tl -> complete (cont_key keys hd) tl in
   let to_choices (a: potential): CRYPTO.choice list = 
     let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
       List.find (fun x -> x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
-  List.map to_choices (complete start_keys)
+  List.map to_choices (complete start_keys lst)
 ;;
