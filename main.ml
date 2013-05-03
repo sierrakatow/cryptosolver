@@ -16,13 +16,13 @@ let main (c: CRYPTO.cryptogram) =
   (* Retrieves possible words from the dictionary to match with cwords *)
   let choices = 
     List.map (fun s -> Dictionary.lookup (To_scheme.to_scheme s []) dict_tree) 
-      cwords  in
+      cwords in
 
   (* Condenses the best choices into an answer list. No NLP rankings used. *)
-  let print_answer (choices : CRYPTO.choice list) = 
-    List.fold_right (fun x y -> x.CRYPTO.word ^ " " ^ y) choices "" in
+ let print_answer (choices : CRYPTO.choice list) = 
+    List.fold_right (fun x y -> x.CRYPTO.word ^ " " ^ y) choices "\n" in
   let answers = List.map print_answer (Decide.decide choices cwords) in
-  List.iter print_string answers
+  List.iter print_string answers 
 
 
 let _ = main Sys.argv.(1) 

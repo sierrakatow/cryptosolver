@@ -38,11 +38,10 @@ let short_first lst =
  * efficient way to do this *)
 type with_info = {w : string; c : string; p : int}
 ;;
-let add_info lst cpt =
-  let f i x = {w = x.CRYPTO.word; c = ""; p = i} in
-  let with_pos = List.mapi (fun i xs -> List.map (f i) xs) lst in
-  let f2 y x = {x with c = y} in 
-  List.map2 (fun xs c -> List.map (f2 c) xs) with_pos cpt 
+let add_info lst cpt : with_info list list=
+  let count = ref 0 in
+  let f y x = {w = x.CRYPTO.word; c = y; p = !count} in 
+  List.map2 (fun xs y -> count := !count + 1; List.map (f y) xs) lst cpt 
 ;;
 type potential = {key : (char * char) list; ans : with_info list}
 
@@ -67,7 +66,7 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
 let decide (choices:CRYPTO.choice list list) (cpt:string list) : CRYPTO.choice list list =
   let lst = short_first (add_info choices cpt) in
   let start_keys =
-    List.map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
+    List.rev_map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
   let rec complete keys =
     match List.tl lst with
     | []-> keys
