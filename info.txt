@@ -1,0 +1,2 @@
+title: Cryptogram Solver
+seas-usernames: skatow, spottash, 

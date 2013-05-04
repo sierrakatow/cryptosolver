@@ -68,15 +68,15 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
   let lst = short_first (add_info choices cpt) in
   let start_keys =
     List.rev_map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
-  let rec complete keys l =
- if l = [] then keys
- else match List.tl l with
-    | []-> keys
-    | hd::tl -> complete (cont_key keys hd) tl in
+  let rec complete_key keys remaining =
+    if remaining = [] then keys
+    else match List.tl remaining with
+         | []-> keys
+         | hd::tl -> complete_key (cont_key keys hd) tl in
   let to_choices (a: potential): CRYPTO.choice list = 
     let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
       List.find (fun x -> x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
-  List.map to_choices (complete start_keys lst)
+  List.map to_choices (complete_key start_keys lst)
 ;;

@@ -64,6 +64,12 @@ let rec lookup (sch: string) (t: CRYPTO.dict) : CRYPTO.choice list =
     if sch < ent.CRYPTO.scheme then lookup sch r
     else if sch > ent.CRYPTO.scheme then lookup sch l
     else ent.CRYPTO.choices
+    
+(* Applies a function to all elements in a red-black tree. *)    
+let rec fold (f: 'a -> 'b) (u: 'b) (t: 'a rbtree) : 'b rbtree =
+  match t with
+  | CRYPTO.Leaf -> u
+  | CRYPTO.Node (color, ent, r, l)-> fold (f ent) u r
 
 
      
