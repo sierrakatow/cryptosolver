@@ -7,10 +7,15 @@ let to_key (wrd:string) (cpt:string) : (char * char) list =
   List.combine wrd cpt
 ;;
 
+(* checks if either a character form a word or a character from a cryptoword 
+ * is present in a key *)
+let key_mem (w:char) (c:char) (k:(char *char) list) : bool =
+  List.exists (fun x -> let (a,b) = x in a = w || b = c) k
+;;
 (* Returns true if word character either corresponds to the crypt character in 
  * the key or isn't in the key. *)
 let check_char (w_char: char) (c_char: char) (key: (char * char) list)  =  
-  (not (List.mem_assoc w_char key) || (List.assoc w_char key) = c_char)
+  (not (key_mem w_char c_char key)) || (List.exists (fun x -> let (a,b) = x in if (a = w_char) then (b = c_char) else if (b = c_char) then (a = w_char) else true) key)
 ;;
 (* "Check, with Unfinished Key"
  * Returns true if a word and a cword are compatible with the key so far.
@@ -26,7 +31,7 @@ let rec check_unf_key (word: char list) (cword : char list)
 (* updates a key to incorporate information from an additional word that 
  * fits the old key *)
 let update_key key wrd cpt = 
-  let f w c rest = if not (List.mem_assoc w key) then (w,c)::rest else rest in 
+  let f w c rest = if not (key_mem w c key) then (w,c)::rest else rest in 
   List.fold_right2 f wrd cpt key
 ;;
 (* sorts a 'a list list by ascending list length *) 
@@ -77,7 +82,7 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
     let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in 
     (* DEBUGGING *) let _ = List.map (fun x -> print_string ("\n" ^ x.w ^ "\n")) ordered in
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
-      List.find (fun x -> (*print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); *) x.CRYPTO.word = y.w) xs in
+      List.find (fun x -> (print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n");  x.CRYPTO.word = y.w)) xs in
     List.map2 find_choice choices ordered in
-  List.map to_choices (complete_key start_keys ( lst))
+  List.map to_choices (complete_key start_keys (List.tl lst))
 ;;
