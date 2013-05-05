@@ -39,7 +39,7 @@ let rec extract (word_scheme: word_schm) : int list =
 let to_scheme cword key : string = 
   let counter = ref 0 in
   let rec to_scheme_r (cword: string) (key: (char * int) list) : string =
-    match (explode cword) with
+    match List.map Char.lowercase (explode cword) with
     | [] -> implode (List.map Char.chr (extract (key)))
     | hd::tl ->
         if checkchar hd key = false

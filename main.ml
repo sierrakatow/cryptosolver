@@ -9,7 +9,7 @@ let main (c: CRYPTO.cryptogram) =
     (fun x -> {CRYPTO.scheme = To_scheme.to_scheme x.CRYPTO.word []; 
 	       CRYPTO.choices = [x]}) choice_lst in
   let dict_tree =
-   List.fold_left (fun x y -> Dictionary.insert y x) CRYPTO.Leaf entry_lst in
+    List.fold_left (fun x y -> Dictionary.insert y x) CRYPTO.Leaf entry_lst in
 
   (* Breaks cyptogram into a list of cwords *)
   let cwords = Str.split (Str.regexp "[ \t]+") c in
@@ -26,19 +26,14 @@ let main (c: CRYPTO.cryptogram) =
   (* Open txt file to write answers to *)
   let answer_file = open_out "answer.txt" in
 
-
+  (* Retrieve answers. *)
   let answers = List.map print_answer (Decide.decide choices cwords) in
+  
+  (* Print to file, if answers exist. *)
   match answers with
-<<<<<<< HEAD
   | [] -> print_string "No answers could be found with this dictionary. Check for typos!\n"
-  | _ -> List.iter print_string answers
-=======
-  | [] -> print_string 
-          "No answers could be found with this dictionary. Check for typos!/n"
-  (* print to "answer.txt" file, then close file *)
   | _ -> (List.iter (Printf.fprintf answer_file "%s\n") answers;
     close_out answer_file)
->>>>>>> 5b0ff1c6170fb68bbf9c8bb233e5651661d1ff55
 
 (* Runs solver. *)
 let _ = 
