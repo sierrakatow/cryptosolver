@@ -10,32 +10,72 @@
 		<h2>Miriam Barnum, Christina Teodorescu, Sam Pottash, and Sierra Katow</h2>
 
 		<h3>How good was your original planning?</h3>
-		<p>Our original planning was definitely ambitious, but this pushed us to create a much better product than we thought we could complete.</p>
-
+		<p>
+		    Our original planning was definitely ambitious, but this pushed us to create a much better product than we thought we could complete.
+		    In general, we overlooked how extensive a task it is to create the multiple functions and algorithms necessary to solve even a simple
+		    cryptogram. In particular, the <tt>decide</tt> function was much more complicated than we expected, especially when trying to solve
+		    cryptograms that were longer in length. This particular portion of the program made for many days of debugging due to unforeseen
+		    logic errors.
+		</p>
+        <p>
+            Of course, the main area of difficulty was the NLP. Originally we did expect it to be the most algorithmically challenging of all the
+            algorithms we employed; however, when we were initially deciding what to include in our cryptogram solver, we did not realize that
+            NLP algorithms (i.e. the CYK algorithm we researched) were quite massive and cost even large, established companies many resources
+            of time and programmers to implement. Therefore, we dialed back to a slightly simpler version of NLP that made more sense given the
+            time we were allotted and the fact that NLP was only one part of our project.
+        </p>
 		<h3>How did your milestones go?</h3>
-		<p>We found the milestones extremely useful for planning out what we had to do and not saving the entire project for the last week.</p>
-
+		<p>
+		    We found the milestones extremely useful for planning out what we had to do and not saving the entire project for the last week.
+	        In particular, we were able to finish a lot of the basic coding before Checkpoint 1. Then, by Checkpoint 2 we were able to finish
+	        the bulk of the more complicated algorithms. However, we were still left with many bugs, which was what made the checkpoints very
+	        useful because we were able to use the final week for major debugging and making the program run more efficiently.
+	    </p>
+        <p>
+            It seems any coding project should be given this sort of checkpoint system especially because major problems arise that are not originally
+            accounted for. The week after Checkpoint 2 was perhaps when our group worked the hardest, despite the fact that we had already written
+            our code. This was just a week of debugging and running into several more bugs than we expected.
+        </p>
 		<h3>What was your experience with design, interfaces, languages, systems, testing, etc.?</h3>
-		<p></p>
+		<p>
+		
+		</p>
 
 		<h3>What surprises, pleasant or otherwise, did you encounter on the way?</h3>
-		<p>We were definitely tripped up with a stack overflow bug that plagued the program when we were trying to load the dictionary from a text file. We were finally able to fix this error when we used <tt>List.rev_map</tt> instead of <tt>List.map</tt>, since the former was tail recursive. It was definitely interesting seeing that this actually fixed the problem, considering that in lecture we were always told that this would happen theoretically but did not ever see this actually solve such a problem until we encountered it in our final project.</p>
+		<p>We were definitely tripped up with a stack overflow bug that plagued the program when we were trying to load the dictionary from a text file. 
+		    We were finally able to fix this error when we used <tt>List.rev_map</tt> instead of <tt>List.map</tt>, since the former was 
+		    tail recursive. It was definitely interesting seeing that this actually fixed the problem, considering that in lecture we were always told that this would happen theoretically but did not ever see this actually solve such a problem until we encountered it in our final project.</p>
+		    
+		<p>
+		    Similarly, we ran into some logic errors in the <tt>decide.ml</tt>. For instance, there was a strange issue where a function kept returning true when it should have returned false when checking a key. This was solved through endless use of <tt>ocamldebug</tt>, stepping through the program until we located the issue and made the necessary changes.
+		</p>
+		<p>
+		    As mentioned earlier, NLP turned out to be an industrial size functionality that took much longer than expected. Out of
+		    all the algorithms of our cryptogram solver, NLP took the most time overall. Even just researching NLP was a task in
+		    itself because of how much literature there is on the topic (and how much is necessary to understand to make for function NLP). Checking a list of words for proper English grammar is no easy feat!
+		</p>
 
 		<h3>What choices did you make that worked out well or badly?</h3>
 		<p>Our choice to go with a red-black tree for the dictionary was a good choice. This was more of a perosonal learning choice because it was a type of tree we had not dealt with in the class (or in a pset) so it was nice to learn something new.</p>
 
+        <p>Our choice to include NLP was a risky one because it ended up being a crazier task than we originally anticipated. However, it was extremely rewarding, and we all got to understand a bit about linguistics.</p> 
+
 		<h3>What would you like to do if there were more time?</h3>
-		<p>If we had more time, we would probably like to try and figure out a way to load the dictionary separately, so it did not have to reload with each run.</p>
+		<p>
+		    If we had more time, we would probably like to try and figure out a way for the user to load in their own dictionary. Of course, this was difficult because depending on the format of the text file, it would need to have different parsing functions to load the dictionary into our data structures.
+		</p>
 
 		<h3>How would you do things differently next time?</h3>
-		<p>Next time we would probably start out with more intermediary testing. We ran into a bit of an issue with <tt>decide.ml</tt> and <tt>to_scheme.ml</tt> that we were eventually able to sort out after we put all the code together. However, it was a bit overwhelming when we completely compiled everything and were given a vague error because we were then forced to go back through multiple files, stepping through the program with oCaml debug, until we pinpointed where the problem occurred. This probably could have been solved if we tried each file individually as we were coding them so we knew they worked individually before compiling them together with the rest of the files.</p>
+		<p>
+		    Next time we would probably start out with more intermediary testing. We ran into a bit of an issue with <tt>decide.ml</tt> and <tt>to_scheme.ml</tt> that we were eventually able to sort out after we put all the code together. However, it was a bit overwhelming when we completely compiled everything and were given a vague error because we were then forced to go back through multiple files, stepping through the program with oCaml debug, until we pinpointed where the problem occurred. This probably could have been solved if we tried each file individually as we were coding them so we knew they worked individually before compiling them together with the rest of the files.
+		</p>
 
 		<h3>What was each group member's contribution to the project?</h3>
-		<p>Each group member generally contributed to everything, whether it was writing the original code or going over and debuggint the code. However, before the first checkpoint we did have individual tasks so as to divide and conquer all the code we knew we had to complete.</p>
+		<p>Each group member generally had his/her hand in all aspects, whether it was writing the original code or going over and debuggint the code. However, we also did have individual tasks so as to divide and conquer all the code we knew we had to complete.</p>
 		
 		<ul type="disc">
 			<li>
-				<b>Miriam</b> primarily focused on the mammoth task of <tt>decide.ml</tt> file, and the difficult duty of trying to find the correct scheme for a given input. She also worked on putting together the <tt>main.ml</tt> file and debugging the stack overflow error mentioned earlier.
+				<b>Miriam</b> primarily focused on the mammoth task of <tt>decide.ml</tt> file, and the difficult duty of trying to find the correct scheme for a given input. She also worked on putting together the <tt>main.ml</tt> file and debugging the stack overflow error mentioned earlier. Her background in linguistics also put her in the NLP team.
 			</li>
 
 			<li>
@@ -43,11 +83,11 @@
 			</li>
 
 			<li>
-				<b>Sam</b> was in charge of the inner workings of the red-black tree, creating the functions that made it possible to load the list of <tt>choices</tt> into a red-black tree of <tt>entries</tt>. He also compiled the <tt>Crypto.ml</tt> file to consolidate all necessary data types. Additionally, he contributed to general debugging and eradication of logic errors.
+				<b>Sam</b> was in charge of the inner workings of the red-black tree, creating the functions that made it possible to load the list of <tt>choices</tt> into a red-black tree of <tt>entries</tt>. He also compiled the <tt>Crypto.ml</tt> file to consolidate all necessary data types. Additionally, he contributed to general debugging and eradication of logic errors, especially those in <tt>decide.ml</tt> and <tt>to_scheme.ml</tt>.
 			</li>
 
 			<li>
-				<b>Sierra</b> originally began by locating an appropriate dictionary text file online, complete with parts of speech, and writing <tt>load.ml</tt> to parse this and load it into a list of <tt>choices</tt>. She also worked on the <tt>Makefile</tt>and on debugging the <tt>to_scheme.ml</tt> and the <tt>main.ml</tt> file.
+				<b>Sierra</b> originally began by locating an appropriate dictionary text file online, complete with parts of speech, and writing <tt>load.ml</tt> to parse this and load it into a list of <tt>choices</tt>. She also worked on creating the <tt>Makefile</tt> and <tt>main.ml</tt> file and on debugging the <tt>to_scheme.ml</tt>. Her job was also to compile most of the write-ups and final video.
 			</li>
 		</ul>
 		
