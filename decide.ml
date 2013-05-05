@@ -78,6 +78,7 @@ let cont_key (keys: potential list) (lst: with_info list) : potential list =
   List.flatten (List.rev_map (fun x -> List.fold_right (f x.key x.ans) lst [])
     keys)
 ;;
+
 (* Takes the original cryptogram (in list form) and a list containing lists of 
  * all possible choices for each word in the crytogram. Returns a list of all 
  * possible answers where every word conforms to a single key.
@@ -108,9 +109,7 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
     
     (* Find the choice with a specific word. *)
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
-      List.find 
-       (fun x -> print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   ");
-       print_string ("match:" ^ y.w ^ "\n"); x.CRYPTO.word = y.w) xs in
+      List.find (fun x -> x.CRYPTO.word = y.w) xs in
     
     (* Finds choices for each cword. *)   
     List.map2 find_choice choices ordered in

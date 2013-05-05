@@ -40,7 +40,8 @@ let insert x s =
 (* Condenses entries with the same schemes into one entry, appending the 
  * first one-choice entry's choice onto that second entry's choice list. *)
 let condense (e1: CRYPTO.entry) (e2: CRYPTO.entry) : CRYPTO.entry =
-  {CRYPTO.scheme = e1.CRYPTO.scheme; CRYPTO.choices = e1.CRYPTO.choices @ e2.CRYPTO.choices}
+  {CRYPTO.scheme = e1.CRYPTO.scheme; 
+    CRYPTO.choices = List.rev_append e1.CRYPTO.choices e2.CRYPTO.choices}
 
 (* Inserts a one-choice entry into a dictionary, condensing entries with the
  * same scheme. Adapted from cited code above. *)
