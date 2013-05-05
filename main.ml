@@ -25,7 +25,7 @@ let main (c: CRYPTO.cryptogram) =
  
   let answers = List.map print_answer (Decide.decide choices cwords) in
   match answers with
-  | [] -> print_string "No answers could be found with this dictionary. Check for typos!/n"
+  | [] -> print_string "No answers could be found with this dictionary. Check for typos!\n"
   | _ -> List.iter print_string answers
 
 (* Runs solver. *)

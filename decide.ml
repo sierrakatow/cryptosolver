@@ -33,9 +33,8 @@ let update_key key wrd cpt =
 let short_first lst = 
     List.sort (fun x y -> compare (List.length x) (List.length y)) lst 
 ;;
-(* takes the choice list list and returns a list of lists of record containing
- * words and their ordinal position in the answer -- there is probably a more 
- * efficient way to do this *)
+(* Takes the choice list list and returns a list of lists of record containing
+ * words and their ordinal position in the answer *)
 type with_info = {w : string; c : string; p : int}
 ;;
 let add_info lst cpt : with_info list list=
@@ -77,7 +76,7 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
     let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in 
     (* DEBUGGING *) let _ = List.map (fun x -> print_string ("\n" ^ x.w ^ "\n")) ordered in
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
-      List.find (fun x -> (* print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); *) x.CRYPTO.word = y.w) xs in
+      List.find (fun x -> print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
-  List.map to_choices (complete_key start_keys ( lst))
+  List.map to_choices (complete_key start_keys (List.tl lst))
 ;;
