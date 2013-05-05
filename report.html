@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>Cryptogram Solver - Project Report</title>
+		<link rel="stylesheet" href="report/styles.css" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<h1>Cryptogram Solver</h1>
+		<h2>Miriam Barnum, Christina Teodorescu, Sam Pottash, and Sierra Katow</h2>
+
+		<h3>How good was your original planning?</h3>
+		<p>Our original planning was definitely ambitious, but this pushed us to create a much better product than we thought we could complete.</p>
+
+		<h3>How did your milestones go?</h3>
+		<p>We found the milestones extremely useful for planning out what we had to do and not saving the entire project for the last week.</p>
+
+		<h3>What was your experience with design, interfaces, languages, systems, testing, etc.?</h3>
+		<p></p>
+
+		<h3>What surprises, pleasant or otherwise, did you encounter on the way?</h3>
+		<p>We were definitely tripped up with a stack overflow bug that plagued the program when we were trying to load the dictionary from a text file. We were finally able to fix this error when we used <tt>List.rev_map</tt> instead of <tt>List.map</tt>, since the former was tail recursive. It was definitely interesting seeing that this actually fixed the problem, considering that in lecture we were always told that this would happen theoretically but did not ever see this actually solve such a problem until we encountered it in our final project.</p>
+
+		<h3>What choices did you make that worked out well or badly?</h3>
+		<p>Our choice to go with a red-black tree for the dictionary was a good choice. This was more of a perosonal learning choice because it was a type of tree we had not dealt with in the class (or in a pset) so it was nice to learn something new.</p>
+
+		<h3>What would you like to do if there were more time?</h3>
+		<p>If we had more time, we would probably like to try and figure out a way to load the dictionary separately, so it did not have to reload with each run.</p>
+
+		<h3>How would you do things differently next time?</h3>
+		<p>Next time we would probably start out with more intermediary testing. We ran into a bit of an issue with <tt>decide.ml</tt> and <tt>to_scheme.ml</tt> that we were eventually able to sort out after we put all the code together. However, it was a bit overwhelming when we completely compiled everything and were given a vague error because we were then forced to go back through multiple files, stepping through the program with oCaml debug, until we pinpointed where the problem occurred. This probably could have been solved if we tried each file individually as we were coding them so we knew they worked individually before compiling them together with the rest of the files.</p>
+
+		<h3>What was each group member's contribution to the project?</h3>
+		<p>Each group member generally contributed to everything, whether it was writing the original code or going over and debuggint the code. However, before the first checkpoint we did have individual tasks so as to divide and conquer all the code we knew we had to complete.</p>
+		
+		<ul type="disc">
+			<li>
+				<b>Miriam</b> primarily focused on the <tt>decide.ml</tt> file, and the difficult duty of trying to find the correct scheme for a given input. She also worked on putting together the <tt>main.ml</tt> file and debuggin the stack overflow error mentioned earlier.
+			</li>
+
+			<li>
+				<b>Christina</b> was primarily involved in coding the <tt>to_scheme.ml</tt> file that contained the function to convert words into their schemes. She also worked on NLP research and to debug the stack overflow issue mentioned earlier, along with the <tt>decide.ml</tt> logic error. 
+			</li>
+
+			<li>
+				<b>Sam</b> was in charge of the inner workings of the red-black tree, creating the functions that made it possible to load the list of <tt>choices</tt> into a red-black tree of <tt>entries</tt>. He also compiled the <tt>Crypto.ml</tt> file to consolidate all necessary data types. Additionally, he contributed to general debugging and eradication of logic errors.
+			</li>
+
+			<li>
+				<b>Sierra</b> originally began by locating an appropriate dictionary text file online, complete with parts of speech, and writing <tt>load.ml</tt> to parse this and load it into a list of <tt>choices</tt>. She also worked on the <tt>Makefile</tt>and on debugging the <tt>to_scheme.ml</tt> and the <tt>main.ml</tt> file.
+			</li>
+		</ul>
+		
+
+		<h3>What is the most important thing you learned from the project?</h3>
+
+		<p>
+			Perhaps the most important thing we learned was how to really take something from concept to completion. Throughout the class, we were given plenty of problem sets that helped us understand certain concepts; however, much of the code was staff code and we were required to fill in the blanks. This gave us a good understanding of these certain aspects of programming; however, it was not until this final project that we were finally required to consolidate all we learned and also figure out how to create our own code from the ground up. For instance, something as seemingly simple as figuring out how to combine multiple files into one functioning program was a task we had not yet really been required to write code for in previous problem sets. Therefore, this was something very crucial we learned from the project.
+		</p>
+
+		<br><br>
+		<div class="footer">
+			&copy; 2013  Miriam Barnum, Christina Teodorescu, Sam Pottash, and Sierra Katow
+		</div>
+	</body>
+</html>
