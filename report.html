@@ -11,11 +11,7 @@
 
 		<h3>How good was your original planning?</h3>
 		<p>
-		    Our original planning was definitely ambitious, but this pushed us to create a much better product than we thought we could complete.
-		    In general, we overlooked how extensive a task it is to create the multiple functions and algorithms necessary to solve even a simple
-		    cryptogram. In particular, the <tt>decide</tt> function was much more complicated than we expected, especially when trying to solve
-		    cryptograms that were longer in length. This particular portion of the program made for many days of debugging due to unforeseen
-		    logic errors.
+		    Our original planning was definitely ambitious, but this pushed us to create a much better product than we thought we could complete.In general, we overlooked how extensive a task it is to create the multiple functions and algorithms necessary to solve even a simple cryptogram. In particular, the <tt>decide</tt> function was much more complicated than we expected, especially when trying to solve cryptograms that were longer in length. This particular portion of the program made for many days of debugging due to unforeseen logic errors.
 		</p>
         <p>
             Of course, the main area of difficulty was the NLP. Originally we did expect it to be the most algorithmically challenging of all the
@@ -38,13 +34,12 @@
         </p>
 		<h3>What was your experience with design, interfaces, languages, systems, testing, etc.?</h3>
 		<p>
-		
+		    We originally were planning on doing everything in oCaml because we knew there would be plenty of matching and that this would work best with oCaml. However, after further research we realized that Python was best for NLP, and there were just so many more resources available if we used Python than if we tried to use oCaml.
 		</p>
 
 		<h3>What surprises, pleasant or otherwise, did you encounter on the way?</h3>
 		<p>We were definitely tripped up with a stack overflow bug that plagued the program when we were trying to load the dictionary from a text file. 
-		    We were finally able to fix this error when we used <tt>List.rev_map</tt> instead of <tt>List.map</tt>, since the former was 
-		    tail recursive. It was definitely interesting seeing that this actually fixed the problem, considering that in lecture we were always told that this would happen theoretically but did not ever see this actually solve such a problem until we encountered it in our final project.</p>
+		    We were finally able to fix this error when we used <tt>List.rev_map</tt> instead of <tt>List.map</tt>, since the former was tail recursive. It was definitely interesting seeing that this actually fixed the problem, considering that in lecture we were always told that this would happen theoretically but did not ever see this actually solve such a problem until we encountered it in our final project.</p>
 		    
 		<p>
 		    Similarly, we ran into some logic errors in the <tt>decide.ml</tt>. For instance, there was a strange issue where a function kept returning true when it should have returned false when checking a key. This was solved through endless use of <tt>ocamldebug</tt>, stepping through the program until we located the issue and made the necessary changes.

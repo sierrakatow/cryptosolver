@@ -11,4 +11,5 @@ Instructions:
 4) Run make.
 5) Run ./Cryptogramsolver "YOUR CRYPTOGRAM HERE"
 6) Run python nlp.py
+    ** You may get an error saying that a certain file is missing that is used to create the part of speech tree. If this is the case, simply follow the directions it gives you and install the missing file.
 7) Be amazed!!!
