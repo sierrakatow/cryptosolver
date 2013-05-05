@@ -43,6 +43,7 @@ let add_info lst cpt : with_info list list=
   let f y x = {w = x.CRYPTO.word; c = y; p = !count} in 
   List.map2 (fun xs y -> count := !count + 1; List.rev_map (f y) xs) lst cpt 
 ;;
+
 type potential = {key : (char * char) list; ans : with_info list}
 
 (* takes a list of partial keys and answers and updates them with info from a 
@@ -73,9 +74,10 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
          | []-> keys
          | hd::tl -> complete_key (cont_key keys hd) tl in
   let to_choices (a: potential): CRYPTO.choice list = 
-    let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in
+    let ordered = List.sort (fun a b -> compare a.p b.p) a.ans in 
+    (* DEBUGGING *) let _ = List.map (fun x -> print_string ("\n" ^ x.w ^ "\n")) ordered in
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
-      List.find (fun x -> print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); x.CRYPTO.word = y.w) xs in
+      List.find (fun x -> (*print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); *) x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
   List.map to_choices (complete_key start_keys lst)
 ;;
