@@ -6,7 +6,9 @@ by Miriam Barnum
 
 Instructions:
 1) Download all files in /code directory.
-2) In your terminal, go inside the directory in which you have saved these files.
-3) Run make.
-4) Run ./Cryptogramsolver "YOUR CRYPTOGRAM HERE"
-5) Press enter and wait for an output of possible answers to your cryptogram!
+2) Download the python nltk library: http://nltk.org/install.html
+3) In your terminal, go inside the directory in which you have saved the /code files.
+4) Run make.
+5) Run ./Cryptogramsolver "YOUR CRYPTOGRAM HERE"
+6) Run python nlp.py
+7) Be amazed!!!
