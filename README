@@ -3,3 +3,10 @@ by Miriam Barnum
    Christina Teodorescu
    Sam Pottash
    Sierra Katow
+
+Instructions:
+1) Download all files in /code directory.
+2) In your terminal, go inside the directory in which you have saved these files.
+3) Run make.
+4) Run ./Cryptogramsolver "YOUR CRYPTOGRAM HERE"
+5) Press enter and wait for an output of possible answers to your cryptogram!
