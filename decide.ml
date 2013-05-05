@@ -46,7 +46,7 @@ let add_info lst cpt : with_info list list=
 
 type potential = {key : (char * char) list; ans : with_info list}
 
-(* takes a list of partial keys and answers and updates them with info from a 
+(* Takes a list of partial keys and answers and updates them with info from a 
    list of choices for a crypto word *)
 let cont_key (keys: potential list) (lst: with_info list) : potential list =
   let f k a word rest = 
