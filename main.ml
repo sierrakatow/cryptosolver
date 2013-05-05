@@ -22,11 +22,26 @@ let main (c: CRYPTO.cryptogram) =
   (* Condenses the best choices into an answer list. No NLP rankings used. *)
   let print_answer (choices : CRYPTO.choice list) = 
     List.fold_right (fun x y -> x.CRYPTO.word ^ " " ^ y) choices "\n" in
- 
+  
+  (* Open txt file to write answers to *)
+  let answer_file = open_out "answer.txt" in
+
+
   let answers = List.map print_answer (Decide.decide choices cwords) in
   match answers with
+<<<<<<< HEAD
   | [] -> print_string "No answers could be found with this dictionary. Check for typos!\n"
   | _ -> List.iter print_string answers
+=======
+  | [] -> print_string 
+          "No answers could be found with this dictionary. Check for typos!/n"
+  (* print to "answer.txt" file, then close file *)
+  | _ -> (List.iter (Printf.fprintf answer_file "%s\n") answers;
+    close_out answer_file)
+>>>>>>> 5b0ff1c6170fb68bbf9c8bb233e5651661d1ff55
 
 (* Runs solver. *)
-let _ = main Sys.argv.(1) 
+let _ = 
+  match Sys.argv.(1) with
+  | "" -> raise (Failure "You did not provide a cryptogram to solve.")
+  | _ -> main Sys.argv.(1) 
