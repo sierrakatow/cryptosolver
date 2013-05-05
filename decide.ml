@@ -79,5 +79,5 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
     let find_choice (xs:CRYPTO.choice list) (y:with_info) = 
       List.find (fun x -> (* print_string ("\nchoice word:" ^ x.CRYPTO.word ^ "   "); print_string ("match:" ^ y.w ^ "\n"); *) x.CRYPTO.word = y.w) xs in
     List.map2 find_choice choices ordered in
-  List.map to_choices (complete_key start_keys lst)
+  List.map to_choices (complete_key start_keys ( lst))
 ;;
