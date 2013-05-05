@@ -69,8 +69,8 @@ let decide (choices:CRYPTO.choice list list) (cpt:string list) :
   let start_keys =
     List.rev_map (fun x -> {key = (to_key x.w x.c); ans = [x]}) (List.hd lst) in
   let rec complete_key keys remaining =
-    if remaining = [] then keys
-    else match List.tl remaining with
+    (*if remaining = [] then keys 
+    else *)match (*List.tl*) remaining with
          | []-> keys
          | hd::tl -> complete_key (cont_key keys hd) tl in
   let to_choices (a: potential): CRYPTO.choice list = 
