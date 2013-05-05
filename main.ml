@@ -3,7 +3,8 @@ open Crypto
 (* Takes in a cryptogram and returns answers. *)
 let main (c: CRYPTO.cryptogram) = 
   
-  (* Loads dictionary into tree *)
+  (* Loads dictionary into tree:
+     Text file source: wordlist.sourceforge.net *)
   let choice_lst = Load.read_file "Dictionary.txt" in 
   let entry_lst = List.rev_map 
     (fun x -> {CRYPTO.scheme = To_scheme.to_scheme x.CRYPTO.word []; 
@@ -32,7 +33,7 @@ let main (c: CRYPTO.cryptogram) =
   | [] -> print_string 
           "No answers could be found with this dictionary. Check for typos!/n"
   (* print to "answer.txt" file, then close file *)
-  | _ -> (List.iter (Printf.fprintf answer_file "%s\n") answers;
+  | _ -> (List.iter (Printf.fprintf answer_file "%s") answers;
     close_out answer_file)
 
 (* Runs solver. *)
