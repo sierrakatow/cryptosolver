@@ -11,11 +11,23 @@ solutions_tagged = [nltk.pos_tag(nltk.word_tokenize(solution)) for solution in s
 output = [zip(*solution) for solution in solutions_tagged]
 
 grammar = nltk.parse_cfg("""
-	S -> NP VP
-	NP -> 'DT' N | N
-	VP -> V | V N
-	V -> 'VB' | 'VBD'
-	N -> 'NN' | 'NNS' | 'NNP'
+	S -> NP VP | VP | S C S
+	NP -> D N1 | N1 | NP PP | PN | NP 'CC' NP | GP
+	VP -> V | V NP | VP PP | VP ADVP | 'MD' VP
+        PP -> P NP 
+        ADVP -> ADV | ADV ADVP | ADVP 'CC' ADVP
+        AP -> A | ADVP A | AP 'CC' AP
+        GP -> G | G N | GP PP | GP ADVP 
+        N1 -> N | AP N
+	V -> 'VB' | 'VBD' | 'VBP' | 'VBZ'
+	N -> 'NN' | 'NNS' | 'EX'
+        PN -> 'PRP' | 'NNP' | 'NNPS' | 'WP'
+        A -> 'JJ' | 'JJR' | 'JJS' | 'CD'
+        ADV -> 'RB'| 'RBR'| 'RBS'
+        P -> 'IN' | 'TO'
+        D -> 'DT' | 'PDT' | 'WDT' | 'PRP$' | 'WP$' 
+        C -> 'CC' | 'WRB'
+        G -> 'VBG'
 """)
 
 parser = nltk.ChartParser(grammar)
