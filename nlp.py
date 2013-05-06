@@ -28,6 +28,7 @@ grammar = nltk.parse_cfg("""
         D -> 'DT' | 'PDT' | 'WDT' | 'PRP$' | 'WP$' 
         C -> 'CC' | 'WRB'
         G -> 'VBG'
+        X -> 'FW' | 'LS' | 'POS' | 'UH' | 'VBN'
 """)
 
 parser = nltk.ChartParser(grammar)
