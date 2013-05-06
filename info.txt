@@ -1,2 +1,2 @@
 title: Cryptogram Solver
-seas-usernames: skatow, spottash, 
+seas-usernames: cteodor, miriambarnum, skatow, spottash
